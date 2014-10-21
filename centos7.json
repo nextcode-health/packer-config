@@ -7,22 +7,21 @@
     "iso_checksum_type" : "md5",
     "ssh_username" : "root",
     "ssh_password" : "vagrant",
-    "boot_command" : ["<tab><wait> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant-centos.ks <return>"],
+    "boot_command" : ["<tab><wait> net.ifnames=0 biosdevname=0 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/vagrant-centos7-nextcode.ks <return>"],
     "http_directory" : "http",
     "virtualbox_version_file" : "/etc/.vbox_version",
     "guest_additions_path" : "/tmp/VBoxGuestAdditions.iso",
-    "guest_additions_url" : "http://download.virtualbox.org/virtualbox/4.3.18/VBoxGuestAdditions_4.3.18.iso",
     "shutdown_command": "shutdown -P now"
   }],
   "provisioners" : [{ 
     "type" : "shell",
     "scripts" : [
-      "scripts/vagrant.sh"
+      "scripts/vagrant-centos7.sh"
     ]
   }],
   "post-processors": [{
     "type": "vagrant",
-    "output": "../base-boxes/nextcode_centos-7-x86_64_{{.Provider}}.box",
+    "output": "base-boxes/nextcode_centos-7-x86_64_{{.Provider}}.box",
     "keep_input_artifact": false
   }]
 }

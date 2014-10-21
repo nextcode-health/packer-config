@@ -25,8 +25,8 @@ EOF
 # Install vagrant keys
 /bin/mkdir /home/vagrant/.ssh
 /bin/chmod 700 /home/vagrant/.ssh
-/usr/bin/curl -o /home/vagrant/.ssh/id_rsa https://raw.github.com/mitchellh/vagrant/master/keys/vagrant
-/usr/bin/curl -o /home/vagrant/.ssh/authorized_keys https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub
+/usr/bin/curl -o /home/vagrant/.ssh/id_rsa http://test.nextcode.com/public/vagrant-keys/id_rsa
+/usr/bin/curl -o /home/vagrant/.ssh/authorized_keys http://test.nextcode.com/public/vagrant-keys/id_rsa.pub
 /bin/chown -R vagrant:vagrant /home/vagrant/.ssh
 /bin/chmod 0400 /home/vagrant/.ssh/*
 
@@ -45,11 +45,6 @@ yum -y install git gcc make automake autoconf libtool gcc-c++ zlib-devel openssl
 
 echo `uname -r`
 
-# # Puppet and chef
-# /usr/bin/gem install --no-ri --no-rdoc puppet
-# /usr/sbin/groupadd -r puppet
-# /usr/bin/gem install --no-ri --no-rdoc chef
-
 if [[ -f /etc/.vbox_version ]]; then
   cd /tmp
   mount -o loop /tmp/VBoxGuestAdditions.iso /mnt
@@ -58,4 +53,10 @@ if [[ -f /etc/.vbox_version ]]; then
   #rm -rf /tmp/VBoxGuestAdditions*.iso
 
   /etc/rc.d/init.d/vboxadd setup
+
+  if [ $? -eq 0 ]; then
+    echo "VBoxGuestAdditions installed successfully."
+  else
+    echo "VBoxGuestAdditions failed to install. This can happen if your VirtualBox version is too old."
+  fi
 fi

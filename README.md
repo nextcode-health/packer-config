@@ -8,7 +8,6 @@ Instructions
 
 1. Begin by installing Packer (see instructions on website)
 2. Clone this repository
-3. Select the image that you want to build and change into the corresponding sub-directory of this repository
-4. Run `packer build template.json`
+3. Select the image that you want to build and run `packer build <template_name>.json`
 
 It's that simple :-)
